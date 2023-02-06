@@ -1,16 +1,19 @@
 ﻿using Finger;
 
-Console.Write("What is your status: ");
-string status = Console.ReadLine();
+var builder = WebApplication.CreateBuilder(args);
 
-// Type identifier = new constructor
-if (status != null)
-{
-    StatusMessage myStatus = new StatusMessage(status, DateTimeOffset.Now);
-    System.Console.WriteLine($"You said your status was {myStatus.Status} at {myStatus.When:T}");
-}
-else
-{
-    Console.WriteLine("Sorry, cannot have a null status");
-}
+var app = builder.Build();
 
+
+app.MapGet("/status", () => {
+    var status = new StatusMessage("All good!", DateTimeOffset.Now);
+    return status;
+});
+
+app.MapPost("/status", (StatusRequest req) => {
+    return req;
+});
+
+app.Run();
+
+public record StatusRequest(string Message);
