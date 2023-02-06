@@ -1,4 +1,4 @@
 namespace Finger
 {
-    public record StatusMessage(string Status, DateTimeOffset When);
+    public record StatusMessage(Guid id, string Status, DateTimeOffset When);
 }

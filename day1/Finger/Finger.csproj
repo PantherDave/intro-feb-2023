@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Marten" Version="6.0.0-alpha.7" />
+  </ItemGroup>
+
 </Project>
