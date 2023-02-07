@@ -13,6 +13,8 @@ Console.WriteLine($"End of break: {endOfBreak}");
 Console.WriteLine($"Suggested start of the song: {startOfSong}");
 var breakSecondsLeft = minutes * 60;
 var secondsUntilSong = (int) ((startOfSong - DateTime.Now).TotalSeconds) + 1;
+ConsoleColor foreColor = Console.ForegroundColor;
+ConsoleColor backColor = Console.BackgroundColor;
 while (breakSecondsLeft >= 0) 
 {
     Console.WriteLine($"Time left in break:\t {breakSecondsLeft / 60}:{breakSecondsLeft % 60}");
@@ -21,7 +23,16 @@ while (breakSecondsLeft >= 0)
     {
         Console.WriteLine($"Time left in song:\t {secondsUntilSong / 60}:{secondsUntilSong % 60}");
         secondsUntilSong--;
+    } else 
+    {
+        if (Console.BackgroundColor == backColor)
+        {
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Black;
+        }
     }
     Thread.Sleep(1000);
     Console.Clear();
 }
+Console.BackgroundColor = backColor;
+Console.ForegroundColor = foreColor;
