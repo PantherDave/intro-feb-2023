@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DjBreakTimer", "DjBreakTimer\DjBreakTimer.csproj", "{362090C1-C4CB-4742-962F-61B102E5FA8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{362090C1-C4CB-4742-962F-61B102E5FA8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{362090C1-C4CB-4742-962F-61B102E5FA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{362090C1-C4CB-4742-962F-61B102E5FA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{362090C1-C4CB-4742-962F-61B102E5FA8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {76BBAEB6-7C4D-4CB6-8773-328A42CDE79A}
+	EndGlobalSection
+EndGlobal
