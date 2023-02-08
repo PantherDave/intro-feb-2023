@@ -44,4 +44,22 @@ public class StringCalculatorTests
         var sum = calculator.Add(numbers);
         Assert.Equal(sum, answer);
     }
+
+    [Theory]
+    [InlineData("-1")]
+    [InlineData("2,-1")]
+    [InlineData("//;4\n-1;-3")]
+    public void ThrowsOnNegatives(string numbers)
+    {
+        var calculator = new StringCalculator();
+        var sum = 0;
+        try
+        {
+            sum = calculator.Add(numbers);
+        } catch (NegativeNumberFoundException) 
+        { 
+            // Excected
+        }
+        Assert.Equal(sum, 0);
+    }
 }
