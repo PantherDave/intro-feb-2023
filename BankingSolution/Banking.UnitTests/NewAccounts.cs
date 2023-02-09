@@ -5,7 +5,7 @@ namespace Banking.UnitTests;
 public class NewAccounts
 {
     [Fact]
-    public void NewAccoutnsHaveTheCorrewctOpeningBalance()
+    public void NewAccoutnsHaveTheCorrectOpeningBalance()
     {
         var account = new BankAccount(new Mock<ICanCalculateAccountBonuses>().Object);
 
