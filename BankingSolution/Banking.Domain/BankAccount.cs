@@ -38,4 +38,3 @@ public class BankAccount
         return _balance >= amountToWithdarw;
     }
 }
-
