@@ -20,6 +20,7 @@ public class MakingWithdrawals
         Assert.Equal(_openingBalance - amountToWithdraw, _account.GetBalance());
     }
 
+    [Fact]
     public void OverdraftThrowsException()
     {
         Assert.Throws<AccountOverdraftException>(() => _account.Withdraw(_openingBalance + .01M));
