@@ -5,14 +5,14 @@ namespace Banking.UnitTests;
 public class MakingWithdrawals
 {
     private decimal _openingBalance = 5000M;
-    private BankAccount _account = new BankAccount();
+    private BankAccount _account = new BankAccount(new DummyBonusCalculator());
 
     [Theory]
     [InlineData(100)]
     [InlineData(1000)]
     public void MakingAWithdrawalDecresesBalance(decimal amountToWithdraw)
     {
-        _account = new BankAccount();
+        _account = new BankAccount(new DummyBonusCalculator());
         _openingBalance = _account.GetBalance();
 
         _account.Withdraw(amountToWithdraw);
@@ -44,7 +44,7 @@ public class MakingWithdrawals
     [Fact]
     public void CanTakeEntireBalance()
     {
-        _account = new BankAccount();
+        _account = new BankAccount(new DummyBonusCalculator());
 
         _account.Withdraw(_account.GetBalance());
 

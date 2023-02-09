@@ -7,7 +7,7 @@ public class NewAccounts
     [Fact]
     public void NewAccoutnsHaveTheCorrewctOpeningBalance()
     {
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
 
         decimal openingBalance = account.GetBalance();
 
