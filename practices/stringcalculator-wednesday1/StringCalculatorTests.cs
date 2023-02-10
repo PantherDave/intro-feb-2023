@@ -1,12 +1,17 @@
-﻿
+﻿using Moq;
 namespace StringCalculator;
 
 public class StringCalculatorTests
 {
+    StringCalculator calculator;
+    public StringCalculatorTests()
+    {
+        calculator = new StringCalculator(new Mock<ILogger>().Object);
+    }
+
     [Fact]
     public void EmptyStringReturnsZero()
     {
-        var calculator = new StringCalculator();
 
         var result = calculator.Add("");
 
@@ -19,7 +24,6 @@ public class StringCalculatorTests
     [InlineData("100", 100)]
     public void SingleDigit(string numbers, int answer)
     {
-        var calculator = new StringCalculator();
         var sum = calculator.Add(numbers);
         Assert.Equal(sum, answer);
     }
@@ -30,7 +34,6 @@ public class StringCalculatorTests
     [InlineData("10,20,30,40,50", 150)]
     public void MultipleDigits(string numbers, int answer)
     {
-        var calculator = new StringCalculator();
         var sum = calculator.Add(numbers);
         Assert.Equal(sum, answer);
     }
@@ -40,7 +43,6 @@ public class StringCalculatorTests
     [InlineData("//;\n1;2", 3)]
     public void DifferentDelimiters(string numbers, int answer)
     {
-        var calculator = new StringCalculator();
         var sum = calculator.Add(numbers);
         Assert.Equal(sum, answer);
     }
@@ -51,7 +53,6 @@ public class StringCalculatorTests
     [InlineData("//;4\n-1;-3")]
     public void ThrowsOnNegatives(string numbers)
     {
-        var calculator = new StringCalculator();
         var sum = 0;
         try
         {
