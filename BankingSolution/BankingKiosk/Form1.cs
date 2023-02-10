@@ -26,9 +26,32 @@ public partial class Form1 : Form
 
     private void DoTransaction(Action<decimal> op)
     {
-        var amount = decimal.Parse(amountInput.Text);
-        op(amount);
-        UpdateBalanceDisplay();
+        string message;
+        try
+        {
+            var amount = decimal.Parse(amountInput.Text);
+            op(amount);
+            UpdateBalanceDisplay();
+        }
+        catch (FormatException)
+        {
+            message = "Enter a number, you moron.";
+            DisplayTransactionError(message);
+        }
+        catch (AccountOverdraftException)
+        {
+            message = "Not enough money to withdraw specified amount";
+            DisplayTransactionError(message);
+        } catch (NoNegativeNumbersException) 
+        {
+            message = "No negative numbers allowed!";
+            DisplayTransactionError(message);
+        } finally
+        {
+            amountInput.SelectAll();
+            amountInput.Focus();
+        }
+        
     }
 
     private void withdrawButton_Click(object sender, EventArgs e)
@@ -40,5 +63,15 @@ public partial class Form1 : Form
     private void ShowMessage(object sendet, EventArgs e)
     {
         DoTransaction((amount) => MessageBox.Show("You clicked a button, blah" + amount.ToString()));
+
+        //DoTransaction(delegate (decimal amount)
+        //{
+        //    MessageBox.Show("You clicked a button, blah" + amount.ToString();
+        //});
+    }
+
+    private void DisplayTransactionError(string message)
+    {
+        MessageBox.Show(message, "Error in transaction", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 }
