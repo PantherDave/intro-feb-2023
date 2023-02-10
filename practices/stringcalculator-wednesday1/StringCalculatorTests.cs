@@ -6,7 +6,7 @@ public class StringCalculatorTests
     StringCalculator calculator;
     public StringCalculatorTests()
     {
-        calculator = new StringCalculator(new Mock<ILogger>().Object);
+        calculator = new StringCalculator(new Mock<ILogger>().Object, new Mock<IWebService>().Object);
     }
 
     [Fact]
