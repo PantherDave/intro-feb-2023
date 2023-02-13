@@ -14,19 +14,15 @@ public class StatusController : ControllerBase
     [HttpGet("/status")]
     public ActionResult GetTheStatus()
     {
-        var contact = _systemTime.GetCurrent().Hour < 16 ? "bob@aol.com" : "555 555-5555";
+        var contact = _systemTime.GetCurrent().Hour >= 16 ? "bob@aol.com" : "555 555-5555";
 
-        var response = new GetStatusResponse
-        {
-            Message = "All Good",
-            Contact = contact
-        };
+        var response = new GetStatusResponse("All Good", contact);
         return Ok(response);
     }
 }
 
-public class GetStatusResponse
-{
-    public string Message { get; set; } = string.Empty;
-    public string Contact { get; set; } = string.Empty;
-}
+record class GetStatusResponse(string Message, string Contact);
+//{
+//    public string Message { get; set; } = string.Empty;
+//    public string Contact { get; set; } = string.Empty;
+//}
