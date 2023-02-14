@@ -1,9 +1,7 @@
 version: "3"
 services:
-  db:
-    image: mcr.microsoft.com/mssql/server
-    volumes:
-      - sql-data:/var/opt/mssql/data
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=TokyoJoe138!
