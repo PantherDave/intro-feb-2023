@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
+import { catchError, Observable, of, tap } from 'rxjs';
+import { StatusResponseModel } from 'src/app/models/status.models';
+import { StatusDataService } from 'src/app/services/status-data.service';
 
 @Component({
   selector: 'app-about',
@@ -9,16 +11,16 @@ import { Observable } from 'rxjs';
 })
 export class AboutComponent {
   responseFromServer$!: Observable<StatusResponseModel>;
-  constructor(private client: HttpClient) {}
+  hasError = false;
+  constructor(private service: StatusDataService) {}
 
   getStatus() {
-    this.responseFromServer$ = this.client.get<StatusResponseModel>(
-      'http://localhost:1337/'
+    this.responseFromServer$ = this.service.getStatus().pipe(
+      tap(() => (this.hasError = false)),
+      catchError((r) => {
+        this.hasError = true;
+        return of({ message: 'unavailable', contact: 'unavailable' });
+      })
     );
   }
 }
-
-type StatusResponseModel = {
-  message: string;
-  contact: string;
-};
