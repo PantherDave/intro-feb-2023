@@ -19,4 +19,8 @@ export class CounterComponent {
   decrement() {
     this.store.dispatch(counterEvents.countDecremented());
   }
+
+  reset() {
+    this.store.dispatch(counterEvents.countReset());
+  }
 }

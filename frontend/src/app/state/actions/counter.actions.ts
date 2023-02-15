@@ -5,5 +5,6 @@ export const counterEvents = createActionGroup({
   events: {
     'Count Incremented': emptyProps(),
     'Count Decremented': emptyProps(),
+    'Count Reset': emptyProps(),
   },
 });
