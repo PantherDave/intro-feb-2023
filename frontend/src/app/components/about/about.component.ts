@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { StatusResponseModel } from 'src/app/models/status.models';
@@ -17,9 +16,9 @@ export class AboutComponent {
   getStatus() {
     this.responseFromServer$ = this.service.getStatus().pipe(
       tap(() => (this.hasError = false)),
-      catchError((r) => {
+      catchError(() => {
         this.hasError = true;
-        return of({ message: 'unavailable', contact: 'unavailable' });
+        return of({ message: 'unavailable', contact: '800 555-5555' });
       })
     );
   }
