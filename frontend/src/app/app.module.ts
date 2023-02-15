@@ -5,27 +5,34 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AboutComponent } from './components/about/about.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AboutComponent } from './components/about/about.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StatusDataService } from './services/status-data.service';
+import { CounterComponent } from './components/counter/counter.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './state';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShoppingListComponent,
-    AboutComponent,
     DashboardComponent,
+    AboutComponent,
     NavigationComponent,
+    CounterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    HttpClientModule, // -> Has a service it provided call the HttpClient
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument(),
   ],
-  providers: [StatusDataService],
+  providers: [StatusDataService], // API -> builder.Services.AddSingleton
   bootstrap: [AppComponent],
 })
 export class AppModule {}
