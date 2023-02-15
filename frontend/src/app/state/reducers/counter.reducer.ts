@@ -1,7 +1,11 @@
 // tell typescript about it
 
 import { createReducer, on } from '@ngrx/store';
-import { CountByValues, counterEvents } from '../actions/counter.actions';
+import {
+  CountByValues,
+  counterDocuments,
+  counterEvents,
+} from '../actions/counter.actions';
 
 export interface CounterState {
   current: number;
@@ -21,14 +25,15 @@ const initialState: CounterState = {
 
 export const reducer = createReducer(
   initialState,
-  on(counterEvents.countIncremented, (s) => ({
-    ...s,
-    current: s.current + s.by,
+  on(counterEvents.countIncremented, (currentState) => ({
+    ...currentState,
+    current: currentState.current + currentState.by,
   })),
   on(counterEvents.countDecremented, (s) => ({
     ...s,
     current: s.current - s.by,
   })),
   on(counterEvents.countReset, (s) => ({ ...s, current: 0 })),
-  on(counterEvents.countBySet, (s, a) => ({ ...s, by: a.by }))
+  on(counterEvents.countBySet, (s, a) => ({ ...s, by: a.by })),
+  on(counterDocuments.counter, (s, a) => a.payload)
 );

@@ -16,7 +16,7 @@ export const reducers: ActionReducerMap<AppState> = {
 };
 // 1. create a "feature selector"
 
-const selectCounterFeature =
+export const selectCounterFeature =
   createFeatureSelector<fromCounter.CounterState>('counter');
 // 2. Create a selector per branch of the state
 

@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { CounterState } from '../reducers/counter.reducer';
 
 export const counterEvents = createActionGroup({
   source: 'Counter Events',
@@ -7,6 +8,14 @@ export const counterEvents = createActionGroup({
     'Count Decremented': emptyProps(),
     'Count Reset': emptyProps(),
     'Count By Set': props<{ by: CountByValues }>(),
+    'Counter Entered': emptyProps(),
+  },
+});
+
+export const counterDocuments = createActionGroup({
+  source: 'Counter Documents',
+  events: {
+    counter: props<{ payload: CounterState }>(),
   },
 });
 
