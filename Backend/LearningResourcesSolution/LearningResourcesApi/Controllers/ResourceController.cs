@@ -25,8 +25,26 @@ public class ResourceController : ControllerBase
               Description = item.Description,
               Link = item.Link,
               Type = item.Type
-          }).ToListAsync(); 
+          }).ToListAsync();
         var response = new GetResourcesResponse { Items = items };
+        return Ok(response);
+    }
+
+    [HttpPost("/resources")]
+    public async Task<ActionResult> AddItem([FromBody] CreateResourceItem request)
+    {
+        if (ModelState.IsValid == false)
+        {
+            return BadRequest(ModelState);
+        }
+        // tomorrow - ADD IT TO THE DATABASE
+        var response = new GetResourceItem
+        {
+            Id = Guid.NewGuid().ToString(),
+            Description = request.Description,
+            Link = request.Link,
+            Type = request.Type,
+        };
         return Ok(response);
     }
 }

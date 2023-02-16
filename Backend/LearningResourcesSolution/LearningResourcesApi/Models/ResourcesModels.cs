@@ -1,4 +1,5 @@
 ﻿using LearningResourcesApi.Domain;
+using System.ComponentModel.DataAnnotations;
 
 namespace LearningResourcesApi.Models;
 
@@ -18,3 +19,13 @@ public record GetResourceItem
 }
 
 // { "id": 1, "description": "blah", "type": "Blog", "link": "https://blah.com" },
+
+public record CreateResourceItem
+{
+    [Required]
+    public string Description { get; init; } = "";
+    [Required]
+    public LearningItemType Type { get; init; }
+    [Required, MaxLength(100), MinLength(5)]
+    public string Link { get; init; } = "";
+}
