@@ -2,21 +2,33 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, ofType } from '@ngrx/effects';
 import { createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs';
-import { selectCounterFeature } from '..';
-import { counterEvents } from '../actions/counter.actions';
-
+import { filter, map, tap } from 'rxjs';
+import { selectCounterFeature } from '../index';
+import { counterDocuments, counterEvents } from '../actions/counter.actions';
+import { CounterState } from '../reducers/counter.reducer';
+import { z } from 'zod';
 @Injectable()
 export class CounterEffects {
+  private readonly CountDataSchema = z.object({
+    current: z.number(),
+    by: z.union([z.literal(1), z.literal(3), z.literal(5)]),
+  });
+
   // this will turn counterEvents.counterEntered -> counterDocuments.counter || nothing
   loadCounterPrefs$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(counterEvents.counterEntered),
-        tap(() => console.log('Time to load the counter data!'))
+        ofType(counterEvents.counterEntered), // -> counterEntered Action
+        map(() => localStorage.getItem('counter-data')), // string || null
+        filter((storedStuff) => storedStuff != null), // stop here if there is nothing stored.
+        map((storedStuff) => JSON.parse(storedStuff!)), // { count: 1, by: 3} as CounterState
+        map(
+          (susObject) => this.CountDataSchema.parse(susObject) as CounterState
+        ),
+        map((payload) => counterDocuments.counter({ payload }))
       );
     },
-    { dispatch: false }
+    { dispatch: true }
   );
 
   saveCounterPrefs$ = createEffect(
